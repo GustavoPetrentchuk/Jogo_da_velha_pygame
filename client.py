@@ -59,7 +59,8 @@ while running:
                     pos = pygame.mouse.get_pos()
                     cellX, cellY = pos[0] // 200, pos[1] // 200
                     grid.get_mouse(cellX, cellY, player)
-
+                    if grid.game_over:
+                        playing = 'False'
                     send_data = '{}-{}-{}-{}'.format(cellX, cellY, 'seuturno', playing)
                     sock.send(send_data.encode())
                     turn = False
@@ -67,7 +68,7 @@ while running:
             if event.key == pygame.K_SPACE and grid.game_over:
                 grid.clear_grid()
                 grid.game_over = False
-                #playing = True
+                playing = True
             elif event.key == pygame.K_ESCAPE:
                 running = False
                 #print('===============')
